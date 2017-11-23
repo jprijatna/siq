@@ -1,0 +1,66 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:acc="com.deloitte.smartservice.SMARTSERVICE.control"
+	controllerName="com.deloitte.smartservice.SMARTSERVICE.controller.SmsAnalyticsDetail" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout" xmlns:tnt="sap.tnt">
+	<Page title="SMS Analytics" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<Panel headerText="Audio Recording">
+				<FlexBox>
+					<HBox width="100%" justifyContent="SpaceBetween">
+						<!--<HBox width="30%" alignItems="Center" justifyContent="Center" id="audioBox" class="hbox_tile_LookAlike sapUiSmallMargin"></HBox>-->
+						<HBox width="100%" alignItems="Center" justifyContent="Center" class="sapUiSmallMargin">
+							<VBox width="50%" direction="Column" class="sapUiSmallMarginTop sapUiSmallMarginBegin">
+								<HBox width="100%">
+									<Title text="Agent:" titleStyle="H4"/>
+									<Text text="Brian Wells" class="fontMedium sapUiSmallMarginBegin"></Text>
+								</HBox>
+								<HBox width="100%">
+									<Title text="Customer:" titleStyle="H4"/>
+									<Link text="Michael Smith" class="fontMedium sapUiSmallMarginBegin"></Link>
+								</HBox>
+							</VBox>
+							<VBox width="50%" direction="Column" class="sapUiSmallMarginTop sapUiSmallMarginEnd">
+								<HBox width="100%">
+									<Title text="Date:" titleStyle="H4"/>
+									<Text text="22-09-2017 12:43 PM" class="fontMedium sapUiSmallMarginBegin"></Text>
+								</HBox>
+								<HBox width="100%">
+									<Title text="Sentiment:" titleStyle="H4"/>
+									<Link text="Positive" class="fontMedium sapUiSmallMarginBegin"></Link>
+								</HBox>
+							</VBox>
+						</HBox>
+					</HBox>
+				</FlexBox>
+			</Panel>
+			<Panel headerText="Message Analytics" height="18rem" width="auto">
+				<HBox width="100%" class="hbox_tile_LookAlike" height="95%">
+					<HBox width="auto">
+						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true" focusable="true">
+							<List id="WordList" width="100%" backgroundDesign="Transparent" items="{openIssuesModel>/openIssues}" mode="SingleSelectMaster"
+								includeItemInSelection="true">
+								<StandardListItem title="{openIssuesModel>CustomerName}" description=""/>
+							</List>
+						</ScrollContainer>
+					</HBox>
+					<HBox width="auto">
+						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true" focusable="true">
+							<Tokenizer width="100%" class="sapUiSmallMargin" tokens="{ path: 'openIssuesModel>/openIssues', sorter: { path: 'Agent' } }">
+								<Token key="{openIssuesModel>CustomerNo}" text="{openIssuesModel>CustomerName} (7)"/>
+							</Tokenizer>
+						</ScrollContainer>
+					</HBox>
+				</HBox>
+			</Panel>
+			<Panel headerText="Transcript" height="14rem">
+				<TextArea width="100%" height="95%" editable="false" class="LongTxtInfo jobCardLongTxt"
+					value="Hi Briana, This is Michael Smith. I am going to be out of office tomorrow so a demo tomorrow is not going to work. I wanted to loop in John Dash, our VP for sales and operation team on our demo. I am going to email you some date and time when he and I ll be available. Let me know if those dates work out for you as well. If you have any questions please feel free to call me. Thanks once again for all your efforts. Looking for your continued coordination and support on the same."></TextArea>
+			</Panel>
+			<Panel headerText="Supervisor Notes" height="14rem">
+				<TextArea width="100%" height="95%" class="LongTxtInfo jobCardLongTxt"></TextArea>
+			</Panel>
+			<FlexBox alignItems="Center" justifyContent="End" class="sapUiResponsiveMargin">
+				<Button type="Accept" width="6rem" class="" text="Save"/>
+			</FlexBox>
+		</content>
+	</Page>
+</mvc:View>

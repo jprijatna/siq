@@ -1,0 +1,181 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:acc="com.deloitte.smartservice.SMARTSERVICE.control"
+	controllerName="com.deloitte.smartservice.SMARTSERVICE.controller.AgentConsole" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout">
+	<Page title="Agent Console" class="backgroundColor">
+		<content>
+			<l:Grid defaultSpan="L6 M6 S12" vSpacing="0">
+				<Panel class="hbox_tile_LookAlike" height="12rem">
+					<headerToolbar>
+						<Toolbar>
+							<core:Icon src='sap-icon://order-status'/>
+							<Title text="Status" class="panelTitle"/>
+						</Toolbar>
+					</headerToolbar>
+					<HBox justifyContent="SpaceBetween">
+						<HBox>
+							<Image src="images/Agent1.jpg" height="5rem"/>
+							<VBox class="sapUiTinyMarginBegin">
+								<Text text="Micheal" class="boldBiggerFont"/>
+								<Text text="Customer Service Executive" class=""/>
+								<Text text="Skill: Equipment Technician" class=""/>
+							</VBox>
+						</HBox>
+						<VBox width="100%" alignItems="Center">
+							<!--<Button text="Call" class="" icon="sap-icon://incoming-call" press="onClickCallPopUp"/>-->
+							<HBox>
+								<Label text="You are "/>
+								<Label class="sapUiTinyMarginBegin" id="agentStatus" design="Bold" text=""/>
+							</HBox>
+							<HBox>
+								<Button text="Idle" icon="sap-icon://sys-enter" press="onSetIdle" width="90%" class="idleBtn sapUiSmallMargin"/>
+								<Button text="Busy" icon="sap-icon://cancel" press="onSetBusy" width="90%" class="busyBtn sapUiSmallMargin"/>
+								<!--<Button text="Busy" icon="sap-icon://cancel" press="onBase64" width="90%" class="busyBtn sapUiSmallMargin"/>-->
+							</HBox>
+						</VBox>
+					</HBox>
+				</Panel>
+				<Panel class="hbox_tile_LookAlike" height="12rem">
+					<headerToolbar>
+						<Toolbar>
+							<core:Icon src='sap-icon://incoming-call'/>
+							<Title text="Call Information" class="panelTitle"/>
+						</Toolbar>
+					</headerToolbar>
+					<VBox alignItems="Center">
+						<Label id="phoneName" text="" class="xtraLargeFont"/>
+						<Label id="phoneNo" text="" class="bitLargeFont"/>
+					</VBox>
+				</Panel>
+			</l:Grid>
+			<l:Grid defaultSpan="L4 M6 S12" vSpacing="0">
+				<Panel class="hbox_tile_LookAlike" width="" height="40rem">
+					<headerToolbar>
+						<Toolbar>
+							<core:Icon src='sap-icon://history'/>
+							<Title text="History of Tickets"/>
+						</Toolbar>
+					</headerToolbar>
+					<VBox alignItems="Center">
+						<items>
+							<l:Grid id="sf_CustomerHistory" hSpacing="2" vSpacing="0" defaultSpan="L6 M6 S6">
+								<l:content>
+									<Label text="DateRange" class="sapUiTinyMarginTop">
+										<layoutData>
+											<l:GridData span="L4 M12 S12"/>
+										</layoutData>
+									</Label>
+									<DateRangeSelection id="dr_fromTo" enabled="true" valueFormat='yyyy-MM-dd' displayFormat='yyyy-MM-dd'>
+										<layoutData>
+											<l:GridData span="L8 M12 S12"/>
+										</layoutData>
+									</DateRangeSelection>
+									<!--<Label text="To" class="sapUiTinyMarginTop">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L4 M12 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Label>-->
+									<!--<DatePicker id="dp_to" enabled="true" valueFormat='yyyy-MM-dd' displayFormat='yyyy-MM-dd'>-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L8 M12 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</DatePicker>-->
+								</l:content>
+							</l:Grid>
+							<acc:ChartJSControl id="graph_custHistory" width="600" height="570" responsive="true" chartType="Bar" data="{custHistory>/histories}"
+								visible="true" options="{custHistory>/options}"/>
+						</items>
+					</VBox>
+				</Panel>
+				<Panel class="hbox_tile_LookAlike" headerText="Open Issues" width="" height="40rem">
+					<headerToolbar>
+						<Toolbar>
+							<core:Icon src='sap-icon://quality-issue'/>
+							<Title text="Open Issues"/>
+						</Toolbar>
+					</headerToolbar>
+					<VBox alignItems="Center">
+						<Table id="idOpenIssuesTable" inset="false" items="{ path: 'openIssuesModel>/openIssues', sorter: { path: 'Name' } }" class="openIssTab">
+							<columns>
+								<Column hAlign="Center">
+									<Text text="Priority"/>
+								</Column>
+								<Column hAlign="Center">
+									<Text text="Ticket"/>
+								</Column>
+								<Column hAlign="Center">
+									<Text text="Status"/>
+								</Column>
+								<Column hAlign="Center">
+									<Text text="Start Time"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<core:Icon src='sap-icon://flag'
+											color="{parts: ['openIssuesModel>Priority'], formatter:'com.deloitte.smartservice.SMARTSERVICE.model.formatter.priorityColorFormatter'}"
+											tooltip="{openIssuesModel>Priority}"/>
+										<ObjectIdentifier title="{openIssuesModel>TicketNo}" text="{openIssuesModel>TicketDesc}"/>
+										<Text text="{openIssuesModel>Status}"/>
+										<Text text="{openIssuesModel>StartTime}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</VBox>
+				</Panel>
+				<Panel class="hbox_tile_LookAlike" width="" height="40rem">
+					<headerToolbar>
+						<Toolbar>
+							<core:Icon src='sap-icon://customer'/>
+							<Title text="Customer Details"/>
+						</Toolbar>
+					</headerToolbar>
+					<VBox alignItems="Center">
+						<l:Grid id="sf_CustomerDetails" hSpacing="2" vSpacing="2" defaultSpan="L6 M6 S6">
+							<l:content>
+								<!--<Label text="Customer Name" class="sapUiTinyMarginTop">-->
+								<!--	<layoutData>-->
+								<!--		<l:GridData span="L4 M12 S12"/>-->
+								<!--	</layoutData>-->
+								<!--</Label>-->
+								<!--<Input id="inp_cusName" enabled="false">-->
+								<!--	<layoutData>-->
+								<!--		<l:GridData span="L8 M12 S12"/>-->
+								<!--	</layoutData>-->
+								<!--</Input>-->
+								<Label text="Account Name" class="sapUiTinyMarginTop">
+									<layoutData>
+										<l:GridData span="L4 M12 S12"/>
+									</layoutData>
+								</Label>
+								<Input id="inp_accName" value="" enabled="false">
+									<layoutData>
+										<l:GridData span="L8 M12 S12"/>
+									</layoutData>
+								</Input>
+								<Label text="Sentiment" class="sapUiTinyMarginTop">
+									<layoutData>
+										<l:GridData span="L4 M12 S12"/>
+									</layoutData>
+								</Label>
+								<HBox justifyContent="Center" alignItems="Center">
+									<core:Icon src='sap-icon://customer-history'
+										color="{parts: ['openIssuesModel>Priority'], formatter:'com.deloitte.smartservice.SMARTSERVICE.model.formatter.priorityColorFormatter'}"
+										tooltip="{openIssuesModel>Priority}"/>
+									<layoutData>
+										<l:GridData span="L8 M12 S12"/>
+									</layoutData>
+								</HBox>
+							</l:content>
+						</l:Grid>
+						<VBox justifyContent="Center" alignItems="Center">
+							<!--<Label text="Location" class="sapUiTinyMarginTop" textAlign="Center"></Label>-->
+							<HBox id="map_canvas" height="26rem" width="35rem" class=""></HBox>
+						</VBox>
+					</VBox>
+				</Panel>
+			</l:Grid>
+		</content>
+	</Page>
+</mvc:View>

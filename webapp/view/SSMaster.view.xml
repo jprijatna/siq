@@ -1,0 +1,19 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.deloitte.smartservice.SMARTSERVICE.controller.SSMaster" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt">
+	<Page title="SupportIQ" showNavButton="false" navButtonPress="onClickNavButtonMaster" class="background_black masterPage_CSS">
+		<content>
+			<tnt:SideNavigation id="sideNavigation" expanded="true" class="sidePanel_CSS">
+				<tnt:item>
+					<tnt:NavigationList>
+						<tnt:NavigationListItem id="nli_agentConsole" text="Agent Console" icon="sap-icon://employee" select="onClickNavigationListItem"></tnt:NavigationListItem>
+						<tnt:NavigationListItem id="nli_callQueue" text="Call Queue" icon="sap-icon://call" select="onClickNavigationListItem"></tnt:NavigationListItem>
+						<tnt:NavigationListItem id="nli_voiceAnalytics" text="Voice Analytics" icon="sap-icon://area-chart" select="onClickNavigationListItem"></tnt:NavigationListItem>
+						<tnt:NavigationListItem id="nli_smsAnalytics" text="SMS Analytics" icon="sap-icon://feed" select="onClickNavigationListItem"></tnt:NavigationListItem>
+						<tnt:NavigationListItem id="nli_callLog" text="Call log" icon="sap-icon://activities" select="onClickNavigationListItem"></tnt:NavigationListItem>
+						<!--<tnt:NavigationListItem id="nli_aboutCLP" text="About D-Wine" icon="sap-icon://card" select="onClickNavigationListItem"></tnt:NavigationListItem>-->
+					</tnt:NavigationList>
+				</tnt:item>
+			</tnt:SideNavigation>
+		</content>
+	</Page>
+</mvc:View>

@@ -1,0 +1,51 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.deloitte.smartservice.SMARTSERVICE.controller.CallQueue" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Call Queue">
+		<content>
+			<Table id="idOpenIssuesTable" inset="false" items="{ path: 'callQueueModel>/openIssues', sorter: { path: 'Name' } }" class="">
+				<columns>
+					<Column hAlign="Center">
+						<Text text="Customer Name"/>
+					</Column>
+					<Column hAlign="Center">
+						<Text text="Call ID"/>
+					</Column>
+					<Column hAlign="Center">
+						<Text text="Incoming call No"/>
+					</Column>
+					<Column hAlign="Center">
+						<Text text="Customer Value"/>
+					</Column>
+					<Column hAlign="Center">
+						<Text text="Actions"/>
+					</Column>
+					<!--<Column hAlign="Center">
+									<Text text="End Time"/>
+								</Column>-->
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier title="{callQueueModel>custName}"/>
+							<Text text="{callQueueModel>callId}"/>
+							<Text text="{callQueueModel>incNo}"/>
+							<Text text="{callQueueModel>custValue}"/>
+							<HBox justifyContent="Center">
+								<Button text="Call Record" icon="sap-icon://incoming-call" press="onGetRecording"/>
+								<Button text="Delete" icon="sap-icon://delete"/>
+								<Button text="To Voicemail" icon="sap-icon://forward"/>
+							</HBox>
+							<!--<SegmentedButton>
+								<items>
+									<SegmentedButtonItem text="Product Details"/>
+									<SegmentedButtonItem text="Delete"/>
+								</items>
+							</SegmentedButton>-->
+							<!--<Text text="{EndTime}"/>-->
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Page>
+</mvc:View>

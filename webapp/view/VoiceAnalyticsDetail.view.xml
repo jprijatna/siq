@@ -1,0 +1,131 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:acc="com.deloitte.smartservice.SMARTSERVICE.control"
+	controllerName="com.deloitte.smartservice.SMARTSERVICE.controller.VoiceAnalyticsDetail" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout" xmlns:tnt="sap.tnt">
+	<Page title="Voice Analytics" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<Panel headerText="Audio Recording">
+				<FlexBox>
+					<HBox width="100%" justifyContent="SpaceBetween">
+						<HBox width="30%" id="audioBox" fitContainer="true" justifyContent="Center" class="hbox_tile_LookAlike"></HBox>
+						<HBox width="70%" alignItems="Center" justifyContent="Center" class="sapUiSmallMargin">
+							<VBox width="50%" direction="Column" class="sapUiSmallMarginTop sapUiSmallMarginBegin">
+								<HBox width="100%">
+									<Title text="Agent:" titleStyle="H4"/>
+									<Text id="agentText" class="fontMedium sapUiSmallMarginBegin"></Text>
+								</HBox>
+								<HBox width="100%">
+									<Title text="Customer:" titleStyle="H4"/>
+									<Link id="customerText" class="fontMedium sapUiSmallMarginBegin"></Link>
+								</HBox>
+							</VBox>
+							<VBox width="50%" direction="Column" class="sapUiSmallMarginTop sapUiSmallMarginEnd">
+								<HBox width="100%">
+									<Title text="Date:" titleStyle="H4"/>
+									<Text id="dateText" class="fontMedium sapUiSmallMarginBegin"></Text>
+								</HBox>
+								<HBox width="100%">
+									<Title text="Sentiment:" titleStyle="H4"/>
+									<Link id="sentimentText" class="fontMedium sapUiSmallMarginBegin"></Link>
+								</HBox>
+							</VBox>
+						</HBox>
+						<!--<VBox>
+							<Toolbar design="Solid" class="sapUiSmallMarginBottom">
+								<Title level="H6" text="Keywords"/>
+							</Toolbar>
+							<HBox>
+								<tnt:SideNavigation id="sideNavigation" expanded="true">
+									<tnt:item>
+										<tnt:NavigationList>
+											<tnt:NavigationListItem text="Item 1" icon="sap-icon://employee">
+												<tnt:NavigationListItem text="Sub Item 1"></tnt:NavigationListItem>
+												<tnt:NavigationListItem text="Sub Item 2"></tnt:NavigationListItem>
+												<tnt:NavigationListItem text="Sub Item 3"></tnt:NavigationListItem>
+												<tnt:NavigationListItem text="Sub Item 4"></tnt:NavigationListItem>
+											</tnt:NavigationListItem>
+											<tnt:NavigationListItem text="Item 2" icon="sap-icon://building">
+												<tnt:NavigationListItem text="Sub Item 1"></tnt:NavigationListItem>
+												<tnt:NavigationListItem text="Sub Item 2"></tnt:NavigationListItem>
+												<tnt:NavigationListItem text="Sub Item 3"></tnt:NavigationListItem>
+												<tnt:NavigationListItem text="Sub Item 4"></tnt:NavigationListItem>
+											</tnt:NavigationListItem>
+											<tnt:NavigationListItem text="Item 1" icon="sap-icon://employee"></tnt:NavigationListItem>
+											<tnt:NavigationListItem text="Item 2" icon="sap-icon://building"></tnt:NavigationListItem>
+											<tnt:NavigationListItem text="Item 3" icon="sap-icon://card"></tnt:NavigationListItem>
+											<tnt:NavigationListItem text="Item 1" icon="sap-icon://employee"></tnt:NavigationListItem>
+											<tnt:NavigationListItem text="Item 2" icon="sap-icon://building"></tnt:NavigationListItem>
+											<tnt:NavigationListItem text="Item 3" icon="sap-icon://card"></tnt:NavigationListItem>
+											<tnt:NavigationListItem text="Item 1" icon="sap-icon://employee"></tnt:NavigationListItem>
+											<tnt:NavigationListItem text="Item 2" icon="sap-icon://building"></tnt:NavigationListItem>
+											<tnt:NavigationListItem text="Item 3" icon="sap-icon://card"></tnt:NavigationListItem>
+										</tnt:NavigationList>
+									</tnt:item>
+								</tnt:SideNavigation>
+								<ScrollContainer height="10rem" width="100%" horizontal="false" vertical="true" focusable="true">
+									<l:Grid defaultSpan="L6 M6 S6">
+										<l:content>
+											<StandardListItem title="Payroll" description="15"></StandardListItem>
+											<StandardListItem title="Archive" description="7"></StandardListItem>
+											<StandardListItem title="Dunning" description="8"></StandardListItem>
+											<StandardListItem title="Awesome" description="3"></StandardListItem>
+											<StandardListItem title="Remarkable" description="1"></StandardListItem>
+											<StandardListItem title="Speech Synthesis" description="8"></StandardListItem>
+											<StandardListItem title="Speech Analytics" description="3"></StandardListItem>
+											<StandardListItem title="Viterbi Algorithm" description="8"></StandardListItem>
+											<StandardListItem title="Hybridity" description="3"></StandardListItem>
+											<StandardListItem title="Company" description="8"></StandardListItem>
+											<StandardListItem title="Management" description="3"></StandardListItem>
+										</l:content>
+									</l:Grid>
+								</ScrollContainer>
+							</HBox>
+						</VBox>
+					</HBox>
+					<HBox>
+						<VBox>
+							<Toolbar design="Solid" class="sapUiSmallMarginBottom">
+								<Title level="H6" text="Recording"/>
+							</Toolbar>
+							<Image src="images/Deloitte.png" densityAware="false" width="85%" height="9rem">
+								<layoutData>
+									<FlexItemData growFactor="1"/>
+								</layoutData>
+							</Image>
+						</VBox>-->
+					</HBox>
+				</FlexBox>
+			</Panel>
+			<Panel headerText="Speech Analytics" height="18rem" width="auto">
+				<HBox width="100%" class="hbox_tile_LookAlike" height="90%">
+					<HBox width="auto">
+						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true" focusable="true">
+							<List id="WordList" width="100%" backgroundDesign="Transparent" items="{entityModel>/entities}" mode="SingleSelectMaster"
+								includeItemInSelection="true">
+								<StandardListItem title="{entityModel>token}" description=""/>
+							</List>
+						</ScrollContainer>
+					</HBox>
+					<HBox width="auto">
+						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true" focusable="true">
+							<Tokenizer width="100%" class="sapUiSmallMargin" tokens="{ path: 'entityModel>/entities'}">
+								<Token text="{entityModel>token} ({entityModel>salience})"/>
+							</Tokenizer>
+						</ScrollContainer>
+					</HBox>
+				</HBox>
+			</Panel>
+			<l:Grid defaultSpan="L6 M6 S12" vSpacing="0">
+					<Panel width="60rem" headerText="Transcript" height="20rem">
+						<TextArea enabled="false" id="transcriptText" width="100%" height="85%" editable="false" class="LongTxtInfo jobCardLongTxt"
+							value="Transcription Details are not available yet."></TextArea>
+					</Panel>
+					<Panel width="60rem" headerText="Supervisor Notes" height="20rem">
+						<TextArea id="supervisorNotes" width="100%" height="90%" class="LongTxtInfo jobCardLongTxt"></TextArea>
+					</Panel>
+			</l:Grid>
+			<FlexBox alignItems="Center" justifyContent="End" class="sapUiResponsiveMargin">
+				<Button type="Accept" width="6rem" class="" text="Save" press="saveSupervisorNotes"/>
+			</FlexBox>
+		</content>
+	</Page>
+</mvc:View>

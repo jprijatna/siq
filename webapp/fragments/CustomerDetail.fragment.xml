@@ -1,0 +1,32 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Customer Details">
+		<content>
+			<Table id="idOpenIssuesTable" selectionChange="handleSelectionChange" mode="SingleSelectMaster" inset="false"
+				items="{ path: 'custCallModel>/results', sorter: { path: 'CustomerNo' } }" class="">
+				<columns>
+					<Column hAlign="Center">
+						<Text text="Customer Name"/>
+					</Column>
+					<Column hAlign="Center">
+						<Text text="Number"/>
+					</Column>
+					<Column hAlign="Center">
+						<Text text="Action"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier text="{custCallModel>CustomerName}"/>
+							<Text text="{custCallModel>Number}"/>
+							<Button text="Call" icon="sap-icon://call"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<buttons>
+			<Button text="Close" press="onClickCloseCallDialog"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

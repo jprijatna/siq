@@ -1,0 +1,9 @@
+<mvc:View controllerName="com.deloitte.smartservice.SMARTSERVICE.controller.App" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:u="sap.ui.unified">
+	<u:Shell class="myShell" id="myShell" icon="images/Deloitte.png">
+		<u:search textAlign="Center">
+			<Title text="SupportIQ" class="myTitle"></Title>
+		</u:search>
+		<SplitApp id="splitApp" mode="HideMode" busy="{appView>/busy}" busyIndicatorDelay="{appView>/delay}" class="masterCSS background_white"/>
+	</u:Shell>
+</mvc:View>

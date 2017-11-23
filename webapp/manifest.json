@@ -1,0 +1,224 @@
+{
+	"_version": "1.5.0",
+	"sap.app": {
+		"id": "com.deloitte.smartservice.SMARTSERVICE",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"version": "1.40.12"
+		}
+	},
+
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+
+		]
+	},
+
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "com.deloitte.smartservice.SMARTSERVICE.view.App",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "com.deloitte.smartservice.SMARTSERVICE.i18n.i18n"
+				}
+			}
+		},
+		"resources": {
+			"css": [{
+				"uri": "css/style.css"
+			}],
+			"js":[
+				{
+					"uri": "control/Chart.min.js"
+				},
+				{
+					"uri": "control/ChartJSControl.js"
+				},
+				{
+					"uri": "model/formatter.js"
+				}
+				]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "com.deloitte.smartservice.SMARTSERVICE.view",
+				"controlId": "splitApp",
+				"transition": "slide",
+				"controlAggregation": "detailPages",
+				"bypassed": {
+					"target": [
+						"NotFound"
+					]
+				},
+				"async": true
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "SSMaster",
+					"target": [
+						"SSMaster",
+						"Blank"
+					]
+				},
+				{
+					"pattern": "AgentConsole",
+					"name": "AgentConsole",
+					"target": [
+						"SSMaster",
+						"AgentConsole"
+					]
+				},
+				{
+					"pattern": "VoiceAnalytics",
+					"name": "VoiceAnalytics",
+					"target": [
+						"SSMaster",
+						"VoiceAnalytics"
+					]
+				},
+				{
+					"pattern": "VoiceAnalyticsDetail",
+					"name": "VoiceAnalyticsDetail",
+					"target": [
+						"SSMaster",
+						"VoiceAnalyticsDetail"
+					]
+				},
+				{
+					"pattern": "SmsAnalytics",
+					"name": "SmsAnalytics",
+					"target": [
+						"SSMaster",
+						"SmsAnalytics"
+					]
+				},
+				{
+					"pattern": "SmsAnalyticsDetail",
+					"name": "SmsAnalyticsDetail",
+					"target": [
+						"SSMaster",
+						"SmsAnalyticsDetail"
+					]
+				},
+				{
+					"pattern": "CallQueue",
+					"name": "CallQueue",
+					"target": [
+						"SSMaster",
+						"CallQueue"
+					]
+				},
+				{
+					"pattern": "CallLog",
+					"name": "CallLog",
+					"target": [
+						"SSMaster",
+						"CallLog"
+					]
+				}
+			],
+			"targets": {
+				"Blank": {
+					"viewName": "Blank",
+					"viewId": "Blank",
+					"viewLevel": 1,
+					"controlAggregation": "detailPages"
+				},
+				"SSMaster": {
+					"viewName": "SSMaster",
+					"viewId": "SSMaster",
+					"viewLevel": 1,
+					"controlAggregation": "masterPages"
+				},
+				"AgentConsole": {
+					"viewName": "AgentConsole",
+					"viewId": "AgentConsole",
+					"viewLevel": 1,
+					"controlAggregation": "detailPages"
+				},
+				"VoiceAnalytics": {
+					"viewName": "VoiceAnalytics",
+					"viewId": "VoiceAnalytics",
+					"viewLevel": 1,
+					"controlAggregation": "detailPages"
+				},
+				"VoiceAnalyticsDetail": {
+					"viewName": "VoiceAnalyticsDetail",
+					"viewId": "VoiceAnalyticsDetail",
+					"viewLevel": 1,
+					"controlAggregation": "detailPages"
+				},
+				"SmsAnalytics": {
+					"viewName": "SmsAnalytics",
+					"viewId": "SmsAnalytics",
+					"viewLevel": 1,
+					"controlAggregation": "detailPages"
+				},
+				"SmsAnalyticsDetail": {
+					"viewName": "SmsAnalyticsDetail",
+					"viewId": "SmsAnalyticsDetail",
+					"viewLevel": 1,
+					"controlAggregation": "detailPages"
+				},
+				"CallQueue": {
+					"viewName": "CallQueue",
+					"viewId": "CallQueue",
+					"viewLevel": 1,
+					"controlAggregation": "detailPages"
+				},
+				"CallLog": {
+					"viewName": "CallLog",
+					"viewId": "CallLog",
+					"viewLevel": 1,
+					"controlAggregation": "detailPages"
+				}
+			}
+		}
+	}
+}
