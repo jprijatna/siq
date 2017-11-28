@@ -118,7 +118,7 @@ sap.ui.define([
 				};
 				
 				$.ajax({
-					url: 'https://cors-anywhere.herokuapp.com/https://us-central1-leonardo-2a5dc.cloudfunctions.net/fetchCallLog',
+					url: 'https://cors-anywhere.herokuapp.com/https://us-central1-gold-order-178001.cloudfunctions.net/SIQ-Live-fetchCallLog',
 					type: 'GET',
 					success: function(response) {
 						console.log(response);

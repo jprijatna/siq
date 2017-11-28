@@ -121,7 +121,7 @@ sap.ui.define([
 				var that = this;
 
 				$.ajax({
-					url: 'https://cors-anywhere.herokuapp.com/https://us-central1-leonardo-2a5dc.cloudfunctions.net/fetchCallAnalysis?recordID=' +
+					url: 'https://cors-anywhere.herokuapp.com/https://us-central1-gold-order-178001.cloudfunctions.net/SIQ-Live-fetchCallAnalysis?recordID=' +
 						a.RecordID,
 					type: 'GET',
 					success: function(response) {
@@ -187,7 +187,7 @@ sap.ui.define([
 			};
 
 			$.ajax({
-				url: 'https://cors-anywhere.herokuapp.com/https://us-central1-leonardo-2a5dc.cloudfunctions.net/saveSupervisorNotes',
+				url: 'https://cors-anywhere.herokuapp.com/https://us-central1-gold-order-178001.cloudfunctions.net/SIQ-Live-saveSupervisorNotes',
 				type: 'POST',
 				dataType: 'json',
 				data: data,

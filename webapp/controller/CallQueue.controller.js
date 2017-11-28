@@ -19,26 +19,9 @@ sap.ui.define([
 		onInit: function() {
 			var that = this;
 			this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-
-			workspace = new Twilio.TaskRouter.Workspace(
-				'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoidjEiLCJmcmllbmRseV9uYW1lIjoiV1NlMTBiNGVhMWRmYWF' +
-				'hMmY4OTUzOTRmN2ZlYTMxMDZlMSIsImlzcyI6IkFDMjZmZDdhNmM5YTg3ODgxYmNhYjVhNGRmNGRiYzdlZmMiLCJleHAiOjE1MDg' +
-				'yNTIzMTEsImFjY291bnRfc2lkIjoiQUMyNmZkN2E2YzlhODc4ODFiY2FiNWE0ZGY0ZGJjN2VmYyIsImNoYW5uZWwiOiJXU2UxMGI' +
-				'0ZWExZGZhYWEyZjg5NTM5NGY3ZmVhMzEwNmUxIiwid29ya3NwYWNlX3NpZCI6IldTZTEwYjRlYTFkZmFhYTJmODk1Mzk0ZjdmZWE' +
-				'zMTA2ZTEiLCJwb2xpY2llcyI6W3sidXJsIjoiaHR0cHM6XC9cL2V2ZW50LWJyaWRnZS50d2lsaW8uY29tXC92MVwvd3NjaGFubmV' +
-				'sc1wvQUMyNmZkN2E2YzlhODc4ODFiY2FiNWE0ZGY0ZGJjN2VmY1wvV1NlMTBiNGVhMWRmYWFhMmY4OTUzOTRmN2ZlYTMxMDZlMSI' +
-				'sIm1ldGhvZCI6IkdFVCIsImFsbG93Ijp0cnVlfSx7InVybCI6Imh0dHBzOlwvXC9ldmVudC1icmlkZ2UudHdpbGlvLmNvbVwvdjF' +
-				'cL3dzY2hhbm5lbHNcL0FDMjZmZDdhNmM5YTg3ODgxYmNhYjVhNGRmNGRiYzdlZmNcL1dTZTEwYjRlYTFkZmFhYTJmODk1Mzk0Zjd' +
-				'mZWEzMTA2ZTEiLCJtZXRob2QiOiJQT1NUIiwiYWxsb3ciOnRydWV9LHsidXJsIjoiaHR0cHM6XC9cL3Rhc2tyb3V0ZXIudHdpbGl' +
-				'vLmNvbVwvdjFcL1dvcmtzcGFjZXNcL1dTZTEwYjRlYTFkZmFhYTJmODk1Mzk0ZjdmZWEzMTA2ZTEiLCJtZXRob2QiOiJHRVQiLCJ' +
-				'hbGxvdyI6dHJ1ZX0seyJ1cmwiOiJodHRwczpcL1wvdGFza3JvdXRlci50d2lsaW8uY29tXC92MVwvV29ya3NwYWNlc1wvV1NlMTB' +
-				'iNGVhMWRmYWFhMmY4OTUzOTRmN2ZlYTMxMDZlMVwvKioiLCJtZXRob2QiOiJHRVQiLCJhbGxvdyI6dHJ1ZSwicXVlcnlfZmlsdGV' +
-				'yIjp7fSwicG9zdF9maWx0ZXIiOnt9fSx7InVybCI6Imh0dHBzOlwvXC90YXNrcm91dGVyLnR3aWxpby5jb21cL3YxXC9Xb3Jrc3B' +
-				'hY2VzXC9XU2UxMGI0ZWExZGZhYWEyZjg5NTM5NGY3ZmVhMzEwNmUxXC8qKiIsIm1ldGhvZCI6IlBPU1QiLCJhbGxvdyI6dHJ1ZSw' +
-				'icXVlcnlfZmlsdGVyIjp7fSwicG9zdF9maWx0ZXIiOnt9fSx7InVybCI6Imh0dHBzOlwvXC90YXNrcm91dGVyLnR3aWxpby5jb21' +
-				'cL3YxXC9Xb3Jrc3BhY2VzXC9XU2UxMGI0ZWExZGZhYWEyZjg5NTM5NGY3ZmVhMzEwNmUxXC8qKiIsIm1ldGhvZCI6IkRFTEVURSI' +
-				'sImFsbG93Ijp0cnVlLCJxdWVyeV9maWx0ZXIiOnt9LCJwb3N0X2ZpbHRlciI6e319XX0.TolVsKadmA2dbKkZ5JU-y6pNqHuRDln' + 'nRMsxKZD15VE');
-
+			
+			var workspaceToken = this.getOwnerComponent().getModel("workspaceToken");
+			workspace = new Twilio.TaskRouter.Workspace(workspaceToken);
 		},
 
 		/**

@@ -26,49 +26,30 @@ sap.ui.define([
 
 			/*Twilio Stuffs*/
 			var workerToken = this.getOwnerComponent().getModel("workerToken");
-			worker = new Twilio.TaskRouter.Worker(
-				'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoidjEiLCJmcmllbmRseV9uYW1lIjoiV0s5NGU0YjkyYTIxNmJ' +
-				'lZmQ0MzBjZGE0ZDA3NmIyNjM0MiIsImlzcyI6IkFDY2QzMmZiOTE2MzM1YmFkZWEzOWM1ZWI5YmM3MTNjMTciLCJleHAiOjE1MDk' +
-				'2MjQ2ODIsImFjY291bnRfc2lkIjoiQUNjZDMyZmI5MTYzMzViYWRlYTM5YzVlYjliYzcxM2MxNyIsImNoYW5uZWwiOiJXSzk0ZTR' +
-				'iOTJhMjE2YmVmZDQzMGNkYTRkMDc2YjI2MzQyIiwid29ya3NwYWNlX3NpZCI6IldTODFjNDRkOGFmOGMxMmZhNTdlNWVlMGI2YjR' +
-				'lNzc3MWYiLCJ3b3JrZXJfc2lkIjoiV0s5NGU0YjkyYTIxNmJlZmQ0MzBjZGE0ZDA3NmIyNjM0MiIsInBvbGljaWVzIjpbeyJ1cmw' +
-				'iOiJodHRwczpcL1wvZXZlbnQtYnJpZGdlLnR3aWxpby5jb21cL3YxXC93c2NoYW5uZWxzXC9BQ2NkMzJmYjkxNjMzNWJhZGVhMzl' +
-				'jNWViOWJjNzEzYzE3XC9XSzk0ZTRiOTJhMjE2YmVmZDQzMGNkYTRkMDc2YjI2MzQyIiwibWV0aG9kIjoiR0VUIiwiYWxsb3ciOnR' +
-				'ydWV9LHsidXJsIjoiaHR0cHM6XC9cL2V2ZW50LWJyaWRnZS50d2lsaW8uY29tXC92MVwvd3NjaGFubmVsc1wvQUNjZDMyZmI5MTY' +
-				'zMzViYWRlYTM5YzVlYjliYzcxM2MxN1wvV0s5NGU0YjkyYTIxNmJlZmQ0MzBjZGE0ZDA3NmIyNjM0MiIsIm1ldGhvZCI6IlBPU1Q' +
-				'iLCJhbGxvdyI6dHJ1ZX0seyJ1cmwiOiJodHRwczpcL1wvdGFza3JvdXRlci50d2lsaW8uY29tXC92MVwvV29ya3NwYWNlc1wvV1M' +
-				'4MWM0NGQ4YWY4YzEyZmE1N2U1ZWUwYjZiNGU3NzcxZlwvV29ya2Vyc1wvV0s5NGU0YjkyYTIxNmJlZmQ0MzBjZGE0ZDA3NmIyNjM' +
-				'0MiIsIm1ldGhvZCI6IkdFVCIsImFsbG93Ijp0cnVlfSx7InVybCI6Imh0dHBzOlwvXC90YXNrcm91dGVyLnR3aWxpby5jb21cL3Y' +
-				'xXC9Xb3Jrc3BhY2VzXC9XUzgxYzQ0ZDhhZjhjMTJmYTU3ZTVlZTBiNmI0ZTc3NzFmXC9BY3Rpdml0aWVzIiwibWV0aG9kIjoiR0V' +
-				'UIiwiYWxsb3ciOnRydWV9LHsidXJsIjoiaHR0cHM6XC9cL3Rhc2tyb3V0ZXIudHdpbGlvLmNvbVwvdjFcL1dvcmtzcGFjZXNcL1d' +
-				'TODFjNDRkOGFmOGMxMmZhNTdlNWVlMGI2YjRlNzc3MWZcL1Rhc2tzXC8qKiIsIm1ldGhvZCI6IkdFVCIsImFsbG93Ijp0cnVlfSx' +
-				'7InVybCI6Imh0dHBzOlwvXC90YXNrcm91dGVyLnR3aWxpby5jb21cL3YxXC9Xb3Jrc3BhY2VzXC9XUzgxYzQ0ZDhhZjhjMTJmYTU' +
-				'3ZTVlZTBiNmI0ZTc3NzFmXC9Xb3JrZXJzXC9XSzk0ZTRiOTJhMjE2YmVmZDQzMGNkYTRkMDc2YjI2MzQyXC9SZXNlcnZhdGlvbnN' +
-				'cLyoqIiwibWV0aG9kIjoiR0VUIiwiYWxsb3ciOnRydWV9LHsidXJsIjoiaHR0cHM6XC9cL3Rhc2tyb3V0ZXIudHdpbGlvLmNvbVw' +
-				'vdjFcL1dvcmtzcGFjZXNcL1dTODFjNDRkOGFmOGMxMmZhNTdlNWVlMGI2YjRlNzc3MWZcL1dvcmtlcnNcL1dLOTRlNGI5MmEyMTZ' +
-				'iZWZkNDMwY2RhNGQwNzZiMjYzNDIiLCJtZXRob2QiOiJQT1NUIiwiYWxsb3ciOnRydWUsInF1ZXJ5X2ZpbHRlciI6e30sInBvc3R' +
-				'fZmlsdGVyIjp7IkFjdGl2aXR5U2lkIjp7InJlcXVpcmVkIjp0cnVlfX19XX0.x0lxlYKJzQ4R6mmhn47GY9Y6OAz1D4wXdbKbr5L' + 'C2ZE');
+			worker = new Twilio.TaskRouter.Worker(workerToken);
 
 			var taskqueueToken = this.getOwnerComponent().getModel("taskqueueToken");
-			taskQueue = new Twilio.TaskRouter.TaskQueue(
-				'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoidjEiLCJmcmllbmRseV9uYW1lIjoiV1FjMTRlNzYzZWIwYzQ' +
-				'1MzY2OGY0NjJmNDE1MTViOGQ4MiIsImlzcyI6IkFDY2QzMmZiOTE2MzM1YmFkZWEzOWM1ZWI5YmM3MTNjMTciLCJleHAiOjE1MDk' +
-				'2MjQ2ODIsImFjY291bnRfc2lkIjoiQUNjZDMyZmI5MTYzMzViYWRlYTM5YzVlYjliYzcxM2MxNyIsImNoYW5uZWwiOiJXUWMxNGU' +
-				'3NjNlYjBjNDUzNjY4ZjQ2MmY0MTUxNWI4ZDgyIiwid29ya3NwYWNlX3NpZCI6IldTODFjNDRkOGFmOGMxMmZhNTdlNWVlMGI2YjR' +
-				'lNzc3MWYiLCJ0YXNrcXVldWVfc2lkIjoiV1FjMTRlNzYzZWIwYzQ1MzY2OGY0NjJmNDE1MTViOGQ4MiIsInBvbGljaWVzIjpbeyJ' +
-				'1cmwiOiJodHRwczpcL1wvZXZlbnQtYnJpZGdlLnR3aWxpby5jb21cL3YxXC93c2NoYW5uZWxzXC9BQ2NkMzJmYjkxNjMzNWJhZGV' +
-				'hMzljNWViOWJjNzEzYzE3XC9XUWMxNGU3NjNlYjBjNDUzNjY4ZjQ2MmY0MTUxNWI4ZDgyIiwibWV0aG9kIjoiR0VUIiwiYWxsb3c' +
-				'iOnRydWV9LHsidXJsIjoiaHR0cHM6XC9cL2V2ZW50LWJyaWRnZS50d2lsaW8uY29tXC92MVwvd3NjaGFubmVsc1wvQUNjZDMyZmI' +
-				'5MTYzMzViYWRlYTM5YzVlYjliYzcxM2MxN1wvV1FjMTRlNzYzZWIwYzQ1MzY2OGY0NjJmNDE1MTViOGQ4MiIsIm1ldGhvZCI6IlB' +
-				'PU1QiLCJhbGxvdyI6dHJ1ZX0seyJ1cmwiOiJodHRwczpcL1wvdGFza3JvdXRlci50d2lsaW8uY29tXC92MVwvV29ya3NwYWNlc1w' +
-				'vV1M4MWM0NGQ4YWY4YzEyZmE1N2U1ZWUwYjZiNGU3NzcxZlwvVGFza1F1ZXVlc1wvV1FjMTRlNzYzZWIwYzQ1MzY2OGY0NjJmNDE' +
-				'1MTViOGQ4MiIsIm1ldGhvZCI6IkdFVCIsImFsbG93Ijp0cnVlfSx7InVybCI6Imh0dHBzOlwvXC90YXNrcm91dGVyLnR3aWxpby5' +
-				'jb21cL3YxXC9Xb3Jrc3BhY2VzXC9XUzgxYzQ0ZDhhZjhjMTJmYTU3ZTVlZTBiNmI0ZTc3NzFmXC9UYXNrUXVldWVzXC9XUWMxNGU' +
-				'3NjNlYjBjNDUzNjY4ZjQ2MmY0MTUxNWI4ZDgyXC8qKiIsIm1ldGhvZCI6IkdFVCIsImFsbG93Ijp0cnVlLCJxdWVyeV9maWx0ZXI' +
-				'iOnt9LCJwb3N0X2ZpbHRlciI6e319LHsidXJsIjoiaHR0cHM6XC9cL3Rhc2tyb3V0ZXIudHdpbGlvLmNvbVwvdjFcL1dvcmtzcGF' +
-				'jZXNcL1dTODFjNDRkOGFmOGMxMmZhNTdlNWVlMGI2YjRlNzc3MWZcL1Rhc2tRdWV1ZXNcL1dRYzE0ZTc2M2ViMGM0NTM2NjhmNDY' +
-				'yZjQxNTE1YjhkODIiLCJtZXRob2QiOiJQT1NUIiwiYWxsb3ciOnRydWUsInF1ZXJ5X2ZpbHRlciI6e30sInBvc3RfZmlsdGVyIjp' +
-				'7fX1dfQ.gE2NUtDqSdjZDamDL69H7OIyxPan9I_C69oOgOOsH6c');
+			taskQueue = new Twilio.TaskRouter.TaskQueue(taskqueueToken
+				
+				/*'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoidjEiLCJmcmllbmRseV9uYW1lIjoiV1E1MzFhNTAxYzE3YmJ' + 
+			'mM2E1ZTUyNTJjZmI4ZjQxM2NhYyIsImlzcyI6IkFDNTI4NDhjMmJmNDZhYjU2NmQ3NDM5ZDA2MTc4NzRiMmYiLCJleHAiOjE1MTE' + 
+			'4NjY2NDEsImFjY291bnRfc2lkIjoiQUM1Mjg0OGMyYmY0NmFiNTY2ZDc0MzlkMDYxNzg3NGIyZiIsImNoYW5uZWwiOiJXUTUzMWE' + 
+			'1MDFjMTdiYmYzYTVlNTI1MmNmYjhmNDEzY2FjIiwid29ya3NwYWNlX3NpZCI6IldTNTQzNDhkNjhkMzNlZDZkNjZhNjVlYWJiNWF' + 
+			'hYmU5ZTIiLCJ0YXNrcXVldWVfc2lkIjoiV1E1MzFhNTAxYzE3YmJmM2E1ZTUyNTJjZmI4ZjQxM2NhYyIsInBvbGljaWVzIjpbeyJ' + 
+			'1cmwiOiJodHRwczpcL1wvZXZlbnQtYnJpZGdlLnR3aWxpby5jb21cL3YxXC93c2NoYW5uZWxzXC9BQzUyODQ4YzJiZjQ2YWI1NjZ' + 
+			'kNzQzOWQwNjE3ODc0YjJmXC9XUTUzMWE1MDFjMTdiYmYzYTVlNTI1MmNmYjhmNDEzY2FjIiwibWV0aG9kIjoiR0VUIiwiYWxsb3c' + 
+			'iOnRydWV9LHsidXJsIjoiaHR0cHM6XC9cL2V2ZW50LWJyaWRnZS50d2lsaW8uY29tXC92MVwvd3NjaGFubmVsc1wvQUM1Mjg0OGM' + 
+			'yYmY0NmFiNTY2ZDc0MzlkMDYxNzg3NGIyZlwvV1E1MzFhNTAxYzE3YmJmM2E1ZTUyNTJjZmI4ZjQxM2NhYyIsIm1ldGhvZCI6IlB' + 
+			'PU1QiLCJhbGxvdyI6dHJ1ZX0seyJ1cmwiOiJodHRwczpcL1wvdGFza3JvdXRlci50d2lsaW8uY29tXC92MVwvV29ya3NwYWNlc1w' + 
+			'vV1M1NDM0OGQ2OGQzM2VkNmQ2NmE2NWVhYmI1YWFiZTllMlwvVGFza1F1ZXVlc1wvV1E1MzFhNTAxYzE3YmJmM2E1ZTUyNTJjZmI' + 
+			'4ZjQxM2NhYyIsIm1ldGhvZCI6IkdFVCIsImFsbG93Ijp0cnVlfSx7InVybCI6Imh0dHBzOlwvXC90YXNrcm91dGVyLnR3aWxpby5' + 
+			'jb21cL3YxXC9Xb3Jrc3BhY2VzXC9XUzU0MzQ4ZDY4ZDMzZWQ2ZDY2YTY1ZWFiYjVhYWJlOWUyXC9UYXNrUXVldWVzXC9XUTUzMWE' + 
+			'1MDFjMTdiYmYzYTVlNTI1MmNmYjhmNDEzY2FjXC8qKiIsIm1ldGhvZCI6IkdFVCIsImFsbG93Ijp0cnVlLCJxdWVyeV9maWx0ZXI' + 
+			'iOnt9LCJwb3N0X2ZpbHRlciI6e319LHsidXJsIjoiaHR0cHM6XC9cL3Rhc2tyb3V0ZXIudHdpbGlvLmNvbVwvdjFcL1dvcmtzcGF' + 
+			'jZXNcL1dTNTQzNDhkNjhkMzNlZDZkNjZhNjVlYWJiNWFhYmU5ZTJcL1Rhc2tRdWV1ZXNcL1dRNTMxYTUwMWMxN2JiZjNhNWU1MjU' +
+			'yY2ZiOGY0MTNjYWMiLCJtZXRob2QiOiJQT1NUIiwiYWxsb3ciOnRydWUsInF1ZXJ5X2ZpbHRlciI6e30sInBvc3RfZmlsdGVyIjp' +
+			'7fX1dfQ.MHsSyWYNh-ZvMabdNxSNwpLMqGMPB-BC5WSFS2X4R7w'*/);
+			console.log("TTOKEN:" + taskqueueToken);
 
 			worker.on('ready', function(worker) {
 				console.log("Successfully registered as: " + worker.friendlyName);
@@ -94,24 +75,8 @@ sap.ui.define([
 			);*/
 
 			var workspaceToken = this.getOwnerComponent().getModel("workspaceToken");
-			workspace = new Twilio.TaskRouter.Workspace(
-				'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoidjEiLCJmcmllbmRseV9uYW1lIjoiV1M4MWM0NGQ4YWY4YzE' +
-				'yZmE1N2U1ZWUwYjZiNGU3NzcxZiIsImlzcyI6IkFDY2QzMmZiOTE2MzM1YmFkZWEzOWM1ZWI5YmM3MTNjMTciLCJleHAiOjE1MDk' +
-				'2MjQ2ODIsImFjY291bnRfc2lkIjoiQUNjZDMyZmI5MTYzMzViYWRlYTM5YzVlYjliYzcxM2MxNyIsImNoYW5uZWwiOiJXUzgxYzQ' +
-				'0ZDhhZjhjMTJmYTU3ZTVlZTBiNmI0ZTc3NzFmIiwid29ya3NwYWNlX3NpZCI6IldTODFjNDRkOGFmOGMxMmZhNTdlNWVlMGI2YjR' +
-				'lNzc3MWYiLCJwb2xpY2llcyI6W3sidXJsIjoiaHR0cHM6XC9cL2V2ZW50LWJyaWRnZS50d2lsaW8uY29tXC92MVwvd3NjaGFubmV' +
-				'sc1wvQUNjZDMyZmI5MTYzMzViYWRlYTM5YzVlYjliYzcxM2MxN1wvV1M4MWM0NGQ4YWY4YzEyZmE1N2U1ZWUwYjZiNGU3NzcxZiI' +
-				'sIm1ldGhvZCI6IkdFVCIsImFsbG93Ijp0cnVlfSx7InVybCI6Imh0dHBzOlwvXC9ldmVudC1icmlkZ2UudHdpbGlvLmNvbVwvdjF' +
-				'cL3dzY2hhbm5lbHNcL0FDY2QzMmZiOTE2MzM1YmFkZWEzOWM1ZWI5YmM3MTNjMTdcL1dTODFjNDRkOGFmOGMxMmZhNTdlNWVlMGI' +
-				'2YjRlNzc3MWYiLCJtZXRob2QiOiJQT1NUIiwiYWxsb3ciOnRydWV9LHsidXJsIjoiaHR0cHM6XC9cL3Rhc2tyb3V0ZXIudHdpbGl' +
-				'vLmNvbVwvdjFcL1dvcmtzcGFjZXNcL1dTODFjNDRkOGFmOGMxMmZhNTdlNWVlMGI2YjRlNzc3MWYiLCJtZXRob2QiOiJHRVQiLCJ' +
-				'hbGxvdyI6dHJ1ZX0seyJ1cmwiOiJodHRwczpcL1wvdGFza3JvdXRlci50d2lsaW8uY29tXC92MVwvV29ya3NwYWNlc1wvV1M4MWM' +
-				'0NGQ4YWY4YzEyZmE1N2U1ZWUwYjZiNGU3NzcxZlwvKioiLCJtZXRob2QiOiJHRVQiLCJhbGxvdyI6dHJ1ZSwicXVlcnlfZmlsdGV' +
-				'yIjp7fSwicG9zdF9maWx0ZXIiOnt9fSx7InVybCI6Imh0dHBzOlwvXC90YXNrcm91dGVyLnR3aWxpby5jb21cL3YxXC9Xb3Jrc3B' +
-				'hY2VzXC9XUzgxYzQ0ZDhhZjhjMTJmYTU3ZTVlZTBiNmI0ZTc3NzFmXC8qKiIsIm1ldGhvZCI6IlBPU1QiLCJhbGxvdyI6dHJ1ZSw' +
-				'icXVlcnlfZmlsdGVyIjp7fSwicG9zdF9maWx0ZXIiOnt9fSx7InVybCI6Imh0dHBzOlwvXC90YXNrcm91dGVyLnR3aWxpby5jb21' +
-				'cL3YxXC9Xb3Jrc3BhY2VzXC9XUzgxYzQ0ZDhhZjhjMTJmYTU3ZTVlZTBiNmI0ZTc3NzFmXC8qKiIsIm1ldGhvZCI6IkRFTEVURSI' +
-				'sImFsbG93Ijp0cnVlLCJxdWVyeV9maWx0ZXIiOnt9LCJwb3N0X2ZpbHRlciI6e319XX0.xlwNWsmGnKiq6oypjF1A73Rb1fsLrWZ' + 'LP1HdDpt2v70');
+			workspace = new Twilio.TaskRouter.Workspace(workspaceToken);
+			console.log(workspaceToken);
 
 			workspace.tasks.fetch(
 				function(error, taskList) {
@@ -357,11 +322,11 @@ sap.ui.define([
 		},
 
 		onSetBusy: function() {
-			worker.update("ActivitySid", "WAac9dcc3b7052272d03a7472a2fd01bde");
+			worker.update("ActivitySid", "WA9dae4784b2317a747d2a71cc7a4a1466");
 		},
 
 		onSetIdle: function() {
-			worker.update("ActivitySid", "WAd16dc16de9ce4222078806efd1488b98");
+			worker.update("ActivitySid", "WA8f25e4d7b5024db83aef8843b30a670a");
 		},
 
 		onBase64: function() {

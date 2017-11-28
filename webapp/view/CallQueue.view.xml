@@ -31,9 +31,9 @@
 							<Text text="{callQueueModel>incNo}"/>
 							<Text text="{callQueueModel>custValue}"/>
 							<HBox justifyContent="Center">
-								<Button text="Call Record" icon="sap-icon://incoming-call" press="onGetRecording"/>
-								<Button text="Delete" icon="sap-icon://delete"/>
-								<Button text="To Voicemail" icon="sap-icon://forward"/>
+								<!--<Button text="Call Record" icon="sap-icon://incoming-call" press="onGetRecording"/>-->
+								<Button text="Reject" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" icon="sap-icon://delete"/>
+								<Button text="Info" class="sapUiSmallMargin sapUiSmallMarginEnd" icon="sap-icon://add-contact"/>
 							</HBox>
 							<!--<SegmentedButton>
 								<items>

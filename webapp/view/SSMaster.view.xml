@@ -8,7 +8,7 @@
 						<tnt:NavigationListItem id="nli_agentConsole" text="Agent Console" icon="sap-icon://employee" select="onClickNavigationListItem"></tnt:NavigationListItem>
 						<tnt:NavigationListItem id="nli_callQueue" text="Call Queue" icon="sap-icon://call" select="onClickNavigationListItem"></tnt:NavigationListItem>
 						<tnt:NavigationListItem id="nli_voiceAnalytics" text="Voice Analytics" icon="sap-icon://area-chart" select="onClickNavigationListItem"></tnt:NavigationListItem>
-						<tnt:NavigationListItem id="nli_smsAnalytics" text="SMS Analytics" icon="sap-icon://feed" select="onClickNavigationListItem"></tnt:NavigationListItem>
+						<!--<tnt:NavigationListItem id="nli_smsAnalytics" text="SMS Analytics" icon="sap-icon://feed" select="onClickNavigationListItem"></tnt:NavigationListItem>-->
 						<tnt:NavigationListItem id="nli_callLog" text="Call log" icon="sap-icon://activities" select="onClickNavigationListItem"></tnt:NavigationListItem>
 						<!--<tnt:NavigationListItem id="nli_aboutCLP" text="About D-Wine" icon="sap-icon://card" select="onClickNavigationListItem"></tnt:NavigationListItem>-->
 					</tnt:NavigationList>

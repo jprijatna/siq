@@ -47,12 +47,15 @@ sap.ui.define([
 			});*/  
 			
 			$.ajax({
-				url: 'https://cors-anywhere.herokuapp.com/https://us-central1-leonardo-2a5dc.cloudfunctions.net/twilioCombinedTokens',
+				url: 'https://cors-anywhere.herokuapp.com/https://us-central1-gold-order-178001.cloudfunctions.net/SIQ-Live-generateToken',
 				type: 'GET',
 				success: function(response) {
 					that.getOwnerComponent().setModel(response.workerToken, "workerToken");
 					that.getOwnerComponent().setModel(response.taskqueueToken, "taskqueueToken");
 					that.getOwnerComponent().setModel(response.workspaceToken, "workspaceToken");
+										//alert("Tokens are ready");
+
+					//console.log("COntent: " + that.getOwnerComponent().getModel("workspaceToken"));
 				}
 			});
 		},

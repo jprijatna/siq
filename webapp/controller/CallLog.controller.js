@@ -1,15 +1,33 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function(Controller) {
+	"sap/ui/core/mvc/Controller",
+	"sap/ui/model/json/JSONModel"
+], function(Controller, JSONModel) {
 	"use strict";
 
 	var worker;
 
-	var interval = null;
+	var interval;
 
 	var that = this;
 
 	var transcriptText;
+
+	var scoreText;
+	var magnitudeText;
+	var sentimentText;
+
+	var hook = '';
+
+	var chart = '';
+	var finalString = '';
+	var count = 0;
+	
+	var selectedScript = '';
+	
+	var logName;
+	var logAccount;
+	var logSentiment;
+	var logDate;
 
 	return Controller.extend("com.deloitte.smartservice.SMARTSERVICE.controller.CallLog", {
 
@@ -56,21 +74,112 @@ sap.ui.define([
 			// Initialize TaskRouter.js on page load using window.workerToken -
 			// a Twilio Capability token that was set in a &lt;script> in agent.php
 			transcriptText = this.getView().byId("transcriptText");
+			scoreText = this.getView().byId("scoreText");
+			magnitudeText = this.getView().byId("magnitudeText");
+			sentimentText = this.getView().byId("sentimentText");
 			
-			var socket = io('https://7e15739a.ngrok.io');
+			logName = this.getView().byId("logName");
+			logAccount = this.getView().byId("logAccount");
+			logSentiment = this.getView().byId("logSentiment");
+			logDate = this.getView().byId("logDate");
+
+			chart = this.getView().byId("sentimentChart");
+
+			var oModel = new sap.ui.model.json.JSONModel();
+			oModel.setData([]);
+			sap.ui.getCore().setModel(oModel);
+
+			var socket = io('http://35.184.43.189:3000');
 			socket.on('connect', function() {
+				//socket.emit('customer', "testing dual emit");
 				console.log(socket.id);
 				console.log('SUCCESS');
-				
+			});
+			socket.on('bot', function(msg) {
+				//finalString = finalString + "\n" + "Agent: " + msg + "\n";
+				transcriptText.setValue(transcriptText.getValue() + "\n" + "---------" + "Agent: " + msg + "---------");
+				transcriptText.scrollTop = transcriptText.scrollHeight;
+				console.log("Agent: " + msg);
 			});
 			socket.on('customer', function(msg) {
-					transcriptText.setValue("Customer: "+msg);
-					console.log("Customer: "+msg);
-				});
-				socket.on('bot', function(msg) {
-					transcriptText.setValue("Agent: "+msg);
-					console.log("Agent: " +msg);
-				});
+				//finalString = finalString + "Customer: " +msg;
+				transcriptText.setValue(transcriptText.getValue() + "\n" + "Customer: " + msg);
+				transcriptText.scrollTop = transcriptText.scrollHeight;
+				selectedScript = msg;
+				//hook = msg;
+				//var oModel = sap.ui.getCore().getModel();
+				// var oData = oModel.getProperty("/");
+				// var oNewObject = {
+				// 	"Value": "Customer: "
+				// };
+				// oData.push(oNewObject);
+				// oModel.setProperty("/", oData);
+				console.log("Customer: " + msg);
+			});
+
+			interval = setInterval(function() {
+				if (transcriptText.getValue().includes("Thank you for calling.") || transcriptText.getValue().includes("Thank you for your purchase!") || transcriptText.getValue().includes("Let me connect you to my colleague.") ) {
+					clearInterval(interval);
+					logName.setValue = '';
+					logAccount.setValue = '';
+					logSentiment.setValue = '';
+					logDate.setValue = '';
+				} else if(selectedScript === '') {
+					//do nothing
+				} else {
+					logName.setValue = 'Richard Sanchez';
+					logAccount.setValue = 'Government';
+					logSentiment.setValue = 'Negative';
+					logDate.setValue = '27/11/2017';
+					$.ajax({
+						url: 'https://language.googleapis.com/v1beta2/documents:analyzeSentiment?key=AIzaSyBNKF2Cx_GliJEN714dn4V0HevjzZUejHY',
+						type: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						dataType: 'json',
+						data: JSON.stringify({
+							"document": {
+								"content": selectedScript,
+								"type": "PLAIN_TEXT"
+							}
+						}),
+						success: function(response) {
+							console.log(response.documentSentiment);
+							var sentimentScore = response.documentSentiment.score;
+							var sentimentMagnitude = response.documentSentiment.magnitude;
+							scoreText.setText(sentimentScore);
+							magnitudeText.setText(sentimentMagnitude);
+							var value = 1;
+							if (sentimentScore === 0.00 && sentimentMagnitude >= 0.00) {
+								value = 1;
+								sentimentText.setText("Mixed");
+							} else if (sentimentScore >= 0.00 && sentimentMagnitude === 0.00) {
+								value = 1;
+								sentimentText.setText("Neutral");
+							} else if (sentimentScore >= 0.00 && sentimentMagnitude >= 0.00) {
+								value = 2;
+								sentimentText.setText("Positive");
+							} else if (sentimentScore < 0.00 && sentimentMagnitude >= 0.00) {
+								value = 0;
+								sentimentText.setText("Negative");
+							}
+							chart.getProperty("data").labels.push("");
+							chart.getProperty("data").datasets[0].data[count] = value;
+							count += 1;
+							chart.update();
+						},
+						error: function(e) {
+							if (e.status === 200 || e.status === 201) {
+								MessageToast.show('Notes Saved.');
+							} else {
+								console.log("Error");
+								console.log(e);
+							}
+						}
+					});
+				}
+			}, 2000);
 
 			/*console.log("initialising");
 			this.logger("Initializing...");
@@ -125,6 +234,42 @@ sap.ui.define([
 			});
 			this.registerTaskRouterCallbacks();
 			this.bindAgentActivityButtons();*/
+		},
+
+		stopInterval: function() {
+			clearInterval(interval);
+		},
+
+		onAfterRendering: function() {
+			var data = {
+				labels: [],
+				datasets: [{
+					label: "Number of People",
+					fill: false,
+					lineTension: 0.1,
+					backgroundColor: "rgba(75,192,192,0.4)",
+					borderColor: "rgba(75,192,192,1)",
+					borderCapStyle: 'butt',
+					borderDash: [],
+					borderDashOffset: 0.0,
+					borderJoinStyle: 'miter',
+					pointBorderColor: "rgba(75,192,192,1)",
+					pointBackgroundColor: "#fff",
+					pointBorderWidth: 1,
+					pointHoverRadius: 5,
+					pointHoverBackgroundColor: "rgba(75,192,192,1)",
+					pointHoverBorderColor: "rgba(220,220,220,1)",
+					pointHoverBorderWidth: 2,
+					pointRadius: 5,
+					pointHitRadius: 10,
+					data: []
+				}]
+			};
+
+			chart.setData(data);
+			//chart.getProperty("data").labels = [];
+			//chart.getProperty("data").datasets[0].data = [];
+			chart.update();
 		},
 
 		registerTaskRouterCallbacks: function() {

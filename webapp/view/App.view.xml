@@ -1,9 +1,18 @@
-<mvc:View controllerName="com.deloitte.smartservice.SMARTSERVICE.controller.App" xmlns:html="http://www.w3.org/1999/xhtml"
+<mvc:View controllerName="com.deloitte.smartservice.SMARTSERVICE.controller.App" xmlns:html="http://www.w3.org/1999/xhtml"  xmlns:tnt="sap.tnt"
 	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:u="sap.ui.unified">
 	<u:Shell class="myShell" id="myShell" icon="images/Deloitte.png">
 		<u:search textAlign="Center">
-			<Title text="SupportIQ" class="myTitle"></Title>
+			<!--<Title text="SupporBlaqQ" class="myTitle"></Title>-->
+			<Image src="images/SupportIQ.png" height="58px"/>
 		</u:search>
-		<SplitApp id="splitApp" mode="HideMode" busy="{appView>/busy}" busyIndicatorDelay="{appView>/delay}" class="masterCSS background_white"/>
+		<!--<tnt:ToolHeader id="brandHeader" class="brandHeader">-->
+		<!--		<Image src="images/DeloitteLogo.png" height="15px" class="sapUiMediumMarginBegin sapUiTinyMarginTop sapUiTinyMarginBottom"/>-->
+		<!--		<ToolbarSpacer/>-->
+		<!--		<Image src="images/SupportIQ.png" height="70px" class="sapUiTinyMarginTop"/>-->
+		<!--		<ToolbarSpacer/>-->
+		<!--	</tnt:ToolHeader>-->
+		<SplitApp id="splitApp" mode="HideMode" busy="{appView>/busy}" busyIndicatorDelay="{appView>/delay}" class="masterCSS background_white">
+			
+		</SplitApp>
 	</u:Shell>
 </mvc:View>

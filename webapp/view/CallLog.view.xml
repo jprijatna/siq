@@ -1,18 +1,74 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:acc="com.deloitte.smartservice.SMARTSERVICE.control"
 	controllerName="com.deloitte.smartservice.SMARTSERVICE.controller.CallLog" xmlns:html="http://www.w3.org/1999/xhtml">
 	<Page title="Call Log">
 		<content>
-			<Panel headerText="Speech Analytics" height="18rem" width="auto">
-				<HBox width="100%" class="hbox_tile_LookAlike" height="100%">
-					<HBox width="auto">
-						<TextArea enabled="false" id="transcriptText" width="100%" height="85%" editable="false" class="LongTxtInfo jobCardLongTxt"
-							value=""></TextArea>
+			<Panel headerText="Speech Analytics" height="28rem" width="auto">
+				<HBox width="100%" class="hbox_tile_LookAlike" height="95%">
+					<HBox width="100%">
+						<TextArea enabled="false" id="transcriptText" width="1850px" height="85%" editable="false" class="LongTxtInfo jobCardLongTxt" value=""></TextArea>
+						<!--<List id="idList" items="{/}">-->
+						<!--	<items>-->
+						<!--		<StandardListItem title="{Value}"/>-->
+						<!--	</items>-->
+						<!--</List>-->
+						<!--<FormattedText id="transcriptText" width="1900px" height="85%" htmlText=""/>-->
 					</HBox>
 				</HBox>
 			</Panel>
-			<Button text="Ticket" press="sendTicket"/>
-			<Button text="Real-Time" press="startReceive"/>
-			<Button text="Stop" press="stopReceive" />
+			<!--<Panel height="24rem" width="100%">-->
+			<HBox alignItems="Stretch" direction="Row" justifyContent="Start" width="1920px">
+				<items>
+					<Panel headerText="Sentiment" height="26rem" width="1400px">
+						<HBox width="100%" class="hbox_tile_LookAlike" height="90%">
+							<VBox width="400px" justifyContent="Center" alignItems="Center">
+								<items>
+									<!--<TextArea enabled="false" width="100%" height="85%" editable="false" class="LongTxtInfo jobCardLongTxt" value=""></TextArea>-->
+									<!--<Label text="Sentiment"/>-->
+									<Label text="---" id="sentimentText" class="sapUiMediumMargin sapUiLargeMarginBegin xtraLargeFont"/>
+									<HBox>
+										<Label text="Score" class="sapUiMediumMarginBegin sapUiSmallMarginEnd bitLargeFont"/>
+										<Label text="Magnitude" class="sapUiSmallMarginBegin bitLargeFont"/>
+									</HBox>
+									<HBox>
+										<Label text="0.0" id="scoreText" class="sapUiMediumMargin biggerLargeFont"/>
+										<Label text="0.0" id="magnitudeText" class="sapUiMediumMargin sapUiLargeMarginBegin biggerLargeFont"/>
+									</HBox>
+								</items>
+							</VBox>
+							<VBox width="1000px">
+								<acc:ChartJSControl width="500" height="150" responsive="true" chartType="line" id="sentimentChart"
+									options="{title: {display: 'true', text: 'Call Sentimentt'}, scales: { yAxes: [{ display: true, ticks: { beginAtZero: true } }]}}"/>
+							</VBox>
+						</HBox>
+					</Panel>
+					<Panel headerText="Profile" height="26rem" width="520px">
+						<VBox width="100%" class="hbox_tile_LookAlike sapUiSmallMargin" height="90%">
+							<!--<TextArea enabled="false" width="500px" height="85%" editable="false" class="LongTxtInfo jobCardLongTxt" value=""></TextArea>-->
+							<!--<Button text="STop" press="stopInterval"/>-->
+							<HBox>
+								<Label text="Name: " design='Bold' class="sapUiSmallMargin sapUiMediumMarginTop bitLargeFont2"/>
+								<Label text="" id="logName" class="sapUiSmallMargin sapUiMediumMarginTop bitLargeFont2"/>
+							</HBox>
+							<HBox>
+								<Label text="Account: " design='Bold' class="sapUiSmallMargin bitLargeFont2"/>
+								<Label text="" id="logAccount" class="sapUiSmallMargin bitLargeFont2"/>
+							</HBox>
+							<HBox>
+								<Label text="Last Sentiment: " design='Bold' class="sapUiSmallMargin bitLargeFont2"/>
+								<Label text="" id="logSentiment" class="sapUiSmallMargin bitLargeFont2"/>
+							</HBox>
+							<HBox>
+								<Label text="Last Contact: " design='Bold' class="sapUiSmallMargin bitLargeFont2"/>
+								<Label text="" id="logDate" class="sapUiSmallMargin bitLargeFont2"/>
+							</HBox>
+						</VBox>
+					</Panel>
+				</items>
+			</HBox>
+			<!--</Panel>-->
+			<!--<Button text="Ticket" press="sendTicket"/>-->
+			<!--<Button text="Real-Time" press="startReceive"/>-->
+			<!--<Button text="Stop" press="stopReceive"/>-->
 		</content>
 	</Page>
 </mvc:View>

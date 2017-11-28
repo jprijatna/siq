@@ -310,6 +310,14 @@
 .bitLargeFont {
     font-size: 150%;
 }
+.bitLargeFont2 {
+    font-size: 120%;
+}
+
+.biggerLargeFont {
+    font-size: 200%;
+}
+
 .hideHeader .sapMDialogTitle {
 	display:none;
 }
